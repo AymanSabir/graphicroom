@@ -1,38 +1,26 @@
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import LogoLight from "../assets/logo-light.svg";
-import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
+import logoLight from "../assets/logo-light.svg"; // make sure your logo is placed in src/assets/
 
 export default function LogoIntro() {
-  const scrollToNext = () => {
-    const nextSection = document.getElementById("hero");
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    // Trigger fade-out after 3.5s
+    const timer = setTimeout(() => setFadeOut(true), 3500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <section className="h-screen flex flex-col items-center justify-center bg-background dark:bg-secondary relative">
-      {/* Logo with animation */}
-      <motion.img
-        src={LogoLight}
+    <div
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-white transition-opacity duration-1000 ${
+        fadeOut ? "opacity-0 pointer-events-none" : "opacity-100"
+      }`}
+    >
+      <img
+        src={logoLight}
         alt="GraphicRoom Logo"
-        className="w-48 md:w-64"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="w-72 md:w-[28rem] lg:w-[32rem] opacity-0 fade-in-up"
       />
-
-      {/* Scroll down indicator */}
-      <motion.div
-        className="absolute bottom-10 flex flex-col items-center text-gray-600 dark:text-gray-300 cursor-pointer"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        onClick={scrollToNext}
-      >
-        <ChevronDown size={32} />
-        <span className="text-sm mt-1">Scroll</span>
-      </motion.div>
-    </section>
+    </div>
   );
 }

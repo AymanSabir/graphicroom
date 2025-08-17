@@ -10,7 +10,16 @@ export default {
         accent: "#FFFFFF",    // White
         highlight: "#2563EB", // Royal Blue
         background: "#F4F4F5" // Light Gray
-      }
+      },
+      keyframes: {
+        fadeInUp: {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        fadeInUp: "fadeInUp 0.8s ease forwards",
+      },
     },
   },
   plugins: [],

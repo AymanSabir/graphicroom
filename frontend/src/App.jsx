@@ -1,22 +1,16 @@
 import LogoIntro from "./components/LogoIntro";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
 
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Intro Section with Logo */}
+    <>
+    <div className="font-sans">
+      {/* Logo Animation - shown first */}
       <LogoIntro />
-
-      {/* Hero Section */}
-      <section
-        id="hero"
-        className="h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-800"
-      >
-        <h1 className="text-4xl font-bold">
-          Welcome to <span className="text-primary">GraphicRoom</span> 🚀
-        </h1>
-      </section>
+      <Navbar />
+      <Hero />
     </div>
+  </>
   );
 }
-
-export default App;
